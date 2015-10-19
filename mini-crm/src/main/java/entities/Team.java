@@ -8,12 +8,12 @@ import java.util.List;
 import javax.persistence.*;
 
 /**
- * Entity implementation class for Entity: Equipe
+ * Entity implementation class for Entity: Team
  *
  */
 @Entity
 
-public class Equipe implements Serializable {
+public class Team implements Serializable {
 
 	
 	private Integer id;
@@ -22,7 +22,7 @@ public class Equipe implements Serializable {
 	
 	private List<User> users;
 
-	public Equipe() {
+	public Team() {
 		super();
 	}   
 	@Id    

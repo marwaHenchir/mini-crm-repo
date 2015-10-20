@@ -3,6 +3,8 @@ package entities;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -18,9 +20,12 @@ public class Client implements Serializable {
 	private String name;
 	private static final long serialVersionUID = 1L;
 
+	private List<Project> Projects;
+	
 	public Client() {
 		super();
-	}   
+	} 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id    
 	public Integer getId() {
 		return this.id;
@@ -35,6 +40,13 @@ public class Client implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	@OneToMany(mappedBy = "client")
+	public List<Project> getProjects() {
+		return Projects;
+	}
+	public void setProjects(List<Project> projects) {
+		Projects = projects;
 	}
    
 }

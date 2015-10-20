@@ -21,10 +21,12 @@ public class Team implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private List<User> users;
+	private User teamLeader;
 
 	public Team() {
 		super();
-	}   
+	}
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id    
 	public Integer getId() {
 		return this.id;
@@ -40,11 +42,19 @@ public class Team implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@OneToMany(mappedBy="team")
 	public List<User> getUsers() {
 		return users;
 	}
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+	@OneToOne
+	public User getTeamLeader() {
+		return teamLeader;
+	}
+	public void setTeamLeader(User teamLeader) {
+		this.teamLeader = teamLeader;
 	}
    
 }

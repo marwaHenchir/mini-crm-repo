@@ -1,6 +1,15 @@
 package services.impl;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import entities.Team;
+import entities.Tech;
+import entities.User;
 import services.interfaces.UserManagementServicesLocal;
 import services.interfaces.UserManagementServicesRemote;
 
@@ -9,12 +18,88 @@ import services.interfaces.UserManagementServicesRemote;
  */
 @Stateless
 public class UserManagementServices implements UserManagementServicesRemote, UserManagementServicesLocal {
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 
-    /**
-     * Default constructor. 
-     */
     public UserManagementServices() {
-        // TODO Auto-generated constructor stub
-    }
+    	
 
+    }
+    @Override
+    public Boolean AddUser (User user){
+    	Boolean b = false;
+		try {
+			entityManager.persist(user);
+			b=true;
+		} catch (Exception e) {
+			System.err.println("problem adding User");
+		}
+		return b;
+    }
+    
+    @Override
+	public User FindUserById(Integer id){
+    	return entityManager.find(User.class, id);
+    }
+	@Override
+	public Boolean DeleteUser(User user){
+		Boolean b = false;
+		try {
+			entityManager.remove(entityManager.merge(user));
+			b = true;
+		} catch (Exception e) {
+			System.err.println("problem DELETING user");
+		}
+		return b;
+	}
+	@Override
+	public Boolean UpdateUser(User user){
+		Boolean b = false;
+		try {
+			entityManager.remove(entityManager.merge(user));
+			b = true;
+		} catch (Exception e) {
+			System.err.println("problem UPDATING user");
+		}
+		return b;
+	}
+	@Override
+	public User login(String login, String password) {
+		User userLoggedIn = null;
+		String jpql = "select u From User u where u.login=:param1 and u.password=:param2";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param1", login);
+		query.setParameter("param2", password);
+		try {
+			userLoggedIn = (User) query.getSingleResult();
+		} catch (Exception e) {
+			System.err.println("you are not authorized");
+		}
+		return userLoggedIn;
+	}
+	@Override
+	public Boolean AddUserTeam(Integer userid, Integer userType, Tech tech, Integer teamid) {
+		Boolean b = false;
+		try {
+			Tech techFound = entityManager.find(Tech.class, userid);
+			Team teamFound = entityManager.find(Team.class, teamid);
+			List<User> MemberList = teamFound.getUsers();
+			if (techFound.getType()!=1){
+				techFound.setTeam(teamFound);
+				MemberList.add(techFound);
+				teamFound.setUsers(MemberList);
+				entityManager.merge(techFound);
+				entityManager.merge(teamFound);
+				b=true;
+			}else { 
+				
+				b=false;
+			}
+			
+		} catch (Exception e) {
+			
+		}
+		return b;
+	}
 }

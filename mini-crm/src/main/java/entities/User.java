@@ -22,6 +22,7 @@ public class User implements Serializable {
 	private String name;
 	private String login;
 	private String password;
+	private Integer Type; //1-TeamLeader 2-Tech 3-Client
 	private static final long serialVersionUID = 1L;
 	
 	private List <Task> tasks;
@@ -82,5 +83,13 @@ public class User implements Serializable {
 
 	public void setTeam(Team team) {
 		this.team = team;
+	}
+
+	public Integer getType() {
+		return Type;
+	}
+
+	public void setType(Integer type) {
+		Type = type;
 	}
 }

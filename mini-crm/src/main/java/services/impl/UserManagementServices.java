@@ -3,11 +3,13 @@ package services.impl;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.flow.builder.ReturnBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entities.Team;
+import entities.TeamLeader;
 import entities.Tech;
 import entities.User;
 import services.interfaces.UserManagementServicesLocal;
@@ -79,7 +81,7 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 		return userLoggedIn;
 	}
 	@Override
-	public Boolean AddUserTeam(Integer userid, Integer userType, Tech tech, Integer teamid) {
+	public Boolean AddUserTeamById (Integer userid, Integer userType, Integer teamid) {
 		Boolean b = false;
 		try {
 			Tech techFound = entityManager.find(Tech.class, userid);
@@ -102,4 +104,27 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 		}
 		return b;
 	}
+	@Override
+	public Boolean SetTeamLeaderById(Integer userid, Integer teamid){
+		Boolean b = false;
+		try {
+			TeamLeader teamLeaderFound = entityManager.find(TeamLeader.class, userid);
+			Team teamFound = entityManager.find(Team.class, teamid);
+			if(teamLeaderFound.getType()== 1){
+				teamFound.setTeamLeader(teamLeaderFound);
+				entityManager.merge(teamFound);
+				b=true;
+			}else{
+				System.err.println("Erreur d'ajout de Team Leader");
+			b=false;
+			}
+			
+			
+		
+	} catch (Exception e) {
+		
+	}
+	return b;
+}
+	
 }

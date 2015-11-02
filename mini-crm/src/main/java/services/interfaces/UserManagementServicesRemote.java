@@ -3,7 +3,6 @@ package services.interfaces;
 import javax.ejb.Remote;
 
 import entities.User;
-import entities.Tech;
 
 @Remote
 public interface UserManagementServicesRemote {

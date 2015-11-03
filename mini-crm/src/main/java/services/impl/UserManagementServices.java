@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import entities.Team;
 import entities.TeamLeader;
 import entities.Tech;
@@ -38,7 +37,6 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 		}
 		return b;
     }
-    
     @Override
 	public User FindUserById(Integer id){
     	return entityManager.find(User.class, id);
@@ -80,7 +78,7 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 		return userLoggedIn;
 	}
 	@Override
-	public Boolean AddUserTeamById (Integer userid, Integer userType, Integer teamid) {
+	public Boolean AddUserTeamById (Integer userid, Integer teamid) {
 		Boolean b = false;
 		try {
 			Tech techFound = entityManager.find(Tech.class, userid);
@@ -93,15 +91,22 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 				entityManager.merge(techFound);
 				entityManager.merge(teamFound);
 				b=true;
-			}else { 
-				
+			}else { 	
 				b=false;
-			}
-			
+			}	
 		} catch (Exception e) {
 			
 		}
 		return b;
+	}
+	@Override
+	public void AddUserTeamByName (String Name, Integer teamid) {
+		try {
+			Tech techFound = entityManager.find(Tech.class, Name);
+			AddUserTeamById(techFound.getId(), teamid);
+		} catch (Exception e) {
+			
+		}
 	}
 	@Override
 	public Boolean SetTeamLeaderById(Integer userid, Integer teamid){
@@ -114,16 +119,29 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 				entityManager.merge(teamFound);
 				b=true;
 			}else{
-				System.err.println("Erreur d'ajout de Team Leader");
+				System.err.println("You are triying to make a client or a tech as a teamleader");
 			b=false;
 			}
-			
-			
-		
-	} catch (Exception e) {
-		
+	} catch (Exception e) {	
 	}
 	return b;
 }
-	
+	@Override
+	public void SetTeamLeaderByName(String Name, Integer teamid){
+	try {
+		TeamLeader teamLeaderFound = entityManager.find(TeamLeader.class, Name);
+		SetTeamLeaderById(teamLeaderFound.getId(), teamid);
+} catch (Exception e) {	
+}
+}
+	@Override
+	public List<User> findTechInTeamByTeamid (Integer teamid) {
+		Team teamFound = entityManager.find(Team.class, teamid);		
+		return teamFound.getUsers();
+	}
+	@Override
+	public String FindTechTeamByTechId(Integer techid){
+		Tech techFound = entityManager.find(Tech.class, techid);
+		return techFound.getTeam().toString();
+	}
 }

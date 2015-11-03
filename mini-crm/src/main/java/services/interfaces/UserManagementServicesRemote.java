@@ -1,5 +1,7 @@
 package services.interfaces;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import entities.User;
@@ -12,6 +14,10 @@ public interface UserManagementServicesRemote {
 	Boolean DeleteUser(User user);
 	User FindUserById(Integer id);
 	User login(String login, String password);
-	Boolean AddUserTeamById (Integer userId, Integer userTypeh,Integer teamid);
+	Boolean AddUserTeamById (Integer userIdypeh,Integer teamid);
 	Boolean SetTeamLeaderById(Integer userid, Integer teamid);
+	void SetTeamLeaderByName(String Name, Integer teamid);
+	void AddUserTeamByName(String Name, Integer teamid);
+	List<User> findTechInTeamByTeamid(Integer teamid);
+	String FindTechTeamByTechId(Integer techid);
 }

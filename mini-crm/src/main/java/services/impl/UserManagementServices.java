@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import entities.Team;
 import entities.TeamLeader;
 import entities.Tech;
@@ -143,5 +144,16 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 	public String FindTechTeamByTechId(Integer techid){
 		Tech techFound = entityManager.find(Tech.class, techid);
 		return techFound.getTeam().toString();
+	}
+	@Override
+	public Boolean AddTeam(Team team) {
+		Boolean b = false;
+		try {
+			entityManager.persist(team);
+			b=true;
+		} catch (Exception e) {
+			System.err.println("problem adding Team");
+		}
+		return b;
 	}
 }

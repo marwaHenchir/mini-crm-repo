@@ -5,6 +5,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import services.interfaces.UserManagementServicesRemote;
+import entities.Team;
 import entities.TeamLeader;
 import entities.Tech;
 import entities.User;
@@ -34,6 +35,9 @@ public class TestAddUser {
 		tech.setName("Aymen");
 		tech.setPassword("21744181");
 		tech.setType(2);
+		
+		Team team = new Team();
+		team.setName("Team1");
 
 		System.out.println(proxy.AddUser(user));
 		System.out.println(proxy.AddUser(teamleader));

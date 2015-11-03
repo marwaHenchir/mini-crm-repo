@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import entities.Team;
 import entities.User;
 
 @Remote
@@ -20,4 +21,6 @@ public interface UserManagementServicesRemote {
 	void AddUserTeamByName(String Name, Integer teamid);
 	List<User> findTechInTeamByTeamid(Integer teamid);
 	String FindTechTeamByTechId(Integer techid);
+	
+	Boolean AddTeam(Team team);
 }

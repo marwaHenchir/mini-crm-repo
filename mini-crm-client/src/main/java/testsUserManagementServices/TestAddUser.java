@@ -13,7 +13,7 @@ public class TestAddUser {
 	public static void main(String[] args) throws NamingException {
 
 		Context context = new InitialContext();
-		String jndiName = "";
+		String jndiName = "/mini-crm/UserManagementServices!services.interfaces.UserManagementServicesRemote";
 		UserManagementServicesRemote proxy = (UserManagementServicesRemote) context
 				.lookup(jndiName);
 

@@ -101,13 +101,17 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 		return b;
 	}
 	@Override
-	public void AddUserTeamByName (String Name, Integer teamid) {
+	public Boolean AddUserTeamByName (String Name, Integer teamid) {
+		Boolean b=false;
 		try {
 			Tech techFound = entityManager.find(Tech.class, Name);
 			AddUserTeamById(techFound.getId(), teamid);
+			b=true;
 		} catch (Exception e) {
+			b=false;
 			
 		}
+		return b;
 	}
 	@Override
 	public Boolean SetTeamLeaderById(Integer userid, Integer teamid){
@@ -117,6 +121,7 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 			Team teamFound = entityManager.find(Team.class, teamid);
 			if(teamLeaderFound.getType()== 1){
 				teamFound.setTeamLeader(teamLeaderFound);
+				teamLeaderFound.setTeam(teamFound);
 				entityManager.merge(teamFound);
 				b=true;
 			}else{
@@ -128,12 +133,16 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 	return b;
 }
 	@Override
-	public void SetTeamLeaderByName(String Name, Integer teamid){
+	public Boolean SetTeamLeaderByName(String Name, Integer teamid){
+		Boolean b=false;
 	try {
 		TeamLeader teamLeaderFound = entityManager.find(TeamLeader.class, Name);
 		SetTeamLeaderById(teamLeaderFound.getId(), teamid);
+		b=true;
 } catch (Exception e) {	
+	b=false;
 }
+	return b;
 }
 	@Override
 	public List<User> findTechInTeamByTeamid (Integer teamid) {

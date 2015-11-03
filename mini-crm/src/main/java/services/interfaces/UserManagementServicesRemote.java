@@ -17,8 +17,8 @@ public interface UserManagementServicesRemote {
 	User login(String login, String password);
 	Boolean AddUserTeamById (Integer userIdypeh,Integer teamid);
 	Boolean SetTeamLeaderById(Integer userid, Integer teamid);
-	void SetTeamLeaderByName(String Name, Integer teamid);
-	void AddUserTeamByName(String Name, Integer teamid);
+	Boolean SetTeamLeaderByName(String Name, Integer teamid);
+	Boolean AddUserTeamByName(String Name, Integer teamid);
 	List<User> findTechInTeamByTeamid(Integer teamid);
 	String FindTechTeamByTechId(Integer techid);
 	

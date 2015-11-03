@@ -13,13 +13,13 @@ public class TestAddUser {
 	public static void main(String[] args) throws NamingException {
 
 		Context context = new InitialContext();
-		String jndiName = "/mini-crm/UserManagementServices!services.interfaces.UserManagementServicesRemote";
+		String jndiName = "";
 		UserManagementServicesRemote proxy = (UserManagementServicesRemote) context
 				.lookup(jndiName);
 
 		User user = new User();
 		user.setName("Karim");
-		user.setLogin("Karim");
+		user.setLogin("User");
 		user.setPassword("123456");
 		user.setType(3);
 

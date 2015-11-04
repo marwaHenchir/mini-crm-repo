@@ -9,7 +9,6 @@ import javax.naming.NamingException;
 import services.interfaces.StatisticServicesRemote;
 import entities.Project;
 import entities.Task;
-import entities.User;
 
 public class TestGetProjectStatus {
 

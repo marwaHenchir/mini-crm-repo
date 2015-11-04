@@ -21,14 +21,16 @@ public class TestAddTaskToProject {
 		
 		Task task1 = new Task();
 		task1.setName("task 1");
-		
 		task1.setStart_date(new Date(15, 10, 10));
+		task1.setDuration(10);
 		Task task2 = new Task();
 		task2.setName("task 2");
 		task2.setStart_date(new Date(15, 10, 20));
+		task2.setDuration(20);
 		Task task3 = new Task();
 		task3.setName("task 3");
 		task3.setStart_date(new Date(15, 10, 28));
+		task3.setDuration(5);
 		
 		
 		

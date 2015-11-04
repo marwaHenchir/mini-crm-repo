@@ -1,14 +1,18 @@
 package services.impl;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import entities.Client;
+
 import entities.Project;
 import entities.Task;
 import entities.Tech;
-
 import services.interfaces.ProjectManagementServicesLocal;
 import services.interfaces.ProjectManagementServicesRemote;
 
@@ -91,6 +95,14 @@ public class ProjectManagementServices implements ProjectManagementServicesRemot
 		return b;
 		
  }
+    @SuppressWarnings("unchecked")
+	@Override
+    public List<Project> findAllProject() {
+		String jpql = "select p from Project p";
+		Query query = entityManager.createQuery(jpql);
+		
+		return query.getResultList();
+	}
     	
     	
 

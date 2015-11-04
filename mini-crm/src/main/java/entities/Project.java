@@ -58,4 +58,10 @@ public class Project implements Serializable {
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", name=" + name + ", client=" + client
+				+ ", tasks=" + tasks + "]";
+	}
+	
 }

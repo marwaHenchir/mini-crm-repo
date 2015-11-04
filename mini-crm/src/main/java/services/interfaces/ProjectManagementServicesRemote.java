@@ -1,5 +1,8 @@
 package services.interfaces;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import entities.Client;
@@ -13,4 +16,5 @@ public interface ProjectManagementServicesRemote {
 	Boolean addTaskToProjectById (Task task , int id);
 	Boolean affectTaskToTechicianById (int idtask , int iduser);
 	Boolean setTaskDoneById (int idtask);
+	List<Project> findAllProject();
 }

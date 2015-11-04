@@ -131,9 +131,9 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 		return teamFound.getUsers();
 	}
 	@Override
-	public String FindTechTeamByTechId(Integer techid){
+	public Integer FindTechTeamByTechId(Integer techid){
 		Tech techFound = entityManager.find(Tech.class, techid);
-		return techFound.getTeam().toString();
+		return techFound.getTeam().getId();
 	}
 	@Override
 	public Boolean AddTeam(Team team) {

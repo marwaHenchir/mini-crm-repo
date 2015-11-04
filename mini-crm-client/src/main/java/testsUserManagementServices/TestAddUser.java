@@ -38,8 +38,6 @@ public class TestAddUser {
 		
 		Team team = new Team();
 		team.setName("Team1");
-		
-		
 
 		
 		System.out.println(proxy.AddUser(teamleader));

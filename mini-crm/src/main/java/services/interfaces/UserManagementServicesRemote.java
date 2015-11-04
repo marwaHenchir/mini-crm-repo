@@ -21,7 +21,7 @@ public interface UserManagementServicesRemote {
 	Boolean SetTeamLeaderByName(String Name, Integer teamid);
 	
 	List<User> findTechInTeamByTeamid(Integer teamid);
-	String FindTechTeamByTechId(Integer techid);
+	Integer FindTechTeamByTechId(Integer techid);
 	
 	Boolean AddTeam(Team team);
 }

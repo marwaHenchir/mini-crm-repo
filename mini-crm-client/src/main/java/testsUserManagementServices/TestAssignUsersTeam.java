@@ -17,6 +17,7 @@ public class TestAssignUsersTeam {
 
 		System.out.println(proxy.SetTeamLeaderById(1, 1));
 		System.out.println(proxy.AffectUserToTeam(2, 1));
-
+		//System.out.println(proxy.findTechInTeamByTeamid(1));
+		//System.out.println(proxy.FindTechTeamByTechId(2));
 	}
 }

@@ -78,56 +78,37 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 		}
 		return userLoggedIn;
 	}
+	
+	
+	
 	@Override
-	public Boolean AddUserTeamById (Integer userid, Integer teamid) {
+	public Boolean AffectUserToTeam (Integer userid, Integer teamid) {
 		Boolean b = false;
-		try {
-			Tech techFound = entityManager.find(Tech.class, userid);
+		try{
+			User techFound = entityManager.find(User.class, userid);
 			Team teamFound = entityManager.find(Team.class, teamid);
-			List<User> MemberList = teamFound.getUsers();
-			if (techFound.getType()!=1){
 				techFound.setTeam(teamFound);
-				MemberList.add(techFound);
-				teamFound.setUsers(MemberList);
-				entityManager.merge(techFound);
-				entityManager.merge(teamFound);
+				entityManager.persist(techFound);
+				
 				b=true;
-			}else { 	
-				b=false;
-			}	
-		} catch (Exception e) {
-			
-		}
+		}catch(Exception e){}
+		
+		
 		return b;
 	}
-	@Override
-	public Boolean AddUserTeamByName (String Name, Integer teamid) {
-		Boolean b=false;
-		try {
-			Tech techFound = entityManager.find(Tech.class, Name);
-			AddUserTeamById(techFound.getId(), teamid);
-			b=true;
-		} catch (Exception e) {
-			b=false;
-			
-		}
-		return b;
-	}
+	
 	@Override
 	public Boolean SetTeamLeaderById(Integer userid, Integer teamid){
 		Boolean b = false;
 		try {
 			TeamLeader teamLeaderFound = entityManager.find(TeamLeader.class, userid);
 			Team teamFound = entityManager.find(Team.class, teamid);
-			if(teamLeaderFound.getType()== 1){
+			
 				teamFound.setTeamLeader(teamLeaderFound);
 				teamLeaderFound.setTeam(teamFound);
 				entityManager.merge(teamFound);
 				b=true;
-			}else{
-				System.err.println("You are triying to make a client or a tech as a teamleader");
-			b=false;
-			}
+			
 	} catch (Exception e) {	
 	}
 	return b;

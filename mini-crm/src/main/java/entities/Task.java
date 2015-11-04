@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.Integer;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
+import javax.ws.rs.DefaultValue;
 
 /**
  * Entity implementation class for Entity: Task
@@ -15,6 +17,8 @@ public class Task implements Serializable {
 
 	
 	private Integer id;
+	private String name;
+	private boolean done;
 	private static final long serialVersionUID = 1L;
 	
 	private Project project;
@@ -32,8 +36,8 @@ public class Task implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@ManyToOne
-	@JoinColumn(name="taskId",referencedColumnName="id", updatable = false, insertable = false)
+	@ManyToOne(cascade = CascadeType.MERGE)
+	
 	public Project getProject() {
 		return project;
 	}
@@ -41,12 +45,29 @@ public class Task implements Serializable {
 		this.project = project;
 	}
 	@ManyToOne
-	@JoinColumn(name="userId",referencedColumnName="id", updatable = false, insertable = false)
+	@JoinColumn(name="userId",referencedColumnName="id", updatable = true, insertable = true)
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	@DefaultValue("0")
+	public boolean getDone(){
+		return done;
+	}
+	
+	public void setDone(boolean done){
+		this.done = done;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
    
 }

@@ -15,10 +15,11 @@ public interface UserManagementServicesRemote {
 	Boolean DeleteUser(User user);
 	User FindUserById(Integer id);
 	User login(String login, String password);
-	Boolean AddUserTeamById (Integer userIdypeh,Integer teamid);
+	
 	Boolean SetTeamLeaderById(Integer userid, Integer teamid);
+	Boolean AffectUserToTeam (Integer userid, Integer teamid);
 	Boolean SetTeamLeaderByName(String Name, Integer teamid);
-	Boolean AddUserTeamByName(String Name, Integer teamid);
+	
 	List<User> findTechInTeamByTeamid(Integer teamid);
 	String FindTechTeamByTechId(Integer techid);
 	

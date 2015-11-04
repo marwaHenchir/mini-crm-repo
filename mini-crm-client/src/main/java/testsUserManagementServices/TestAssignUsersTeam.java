@@ -15,8 +15,8 @@ public class TestAssignUsersTeam {
 		UserManagementServicesRemote proxy = (UserManagementServicesRemote) context
 				.lookup(jndiName);
 
-		System.out.println(proxy.AddUserTeamById(3, 1));
-		System.out.println(proxy.SetTeamLeaderById(2, 1));
+		System.out.println(proxy.SetTeamLeaderById(1, 1));
+		System.out.println(proxy.AffectUserToTeam(2, 1));
 
 	}
 }

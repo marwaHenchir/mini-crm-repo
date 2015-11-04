@@ -22,7 +22,7 @@ public class User implements Serializable {
 	private String name;
 	private String login;
 	private String password;
-	private Integer Type; //1-TeamLeader 2-Tech 3-Client
+	
 	private static final long serialVersionUID = 1L;
 	
 	private List <Task> tasks;
@@ -32,9 +32,8 @@ public class User implements Serializable {
 	public User() {
 		super();
 	}
-
-	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	public Integer getId() {
 		return this.id;
 	}
@@ -76,7 +75,7 @@ public class User implements Serializable {
 		this.tasks = tasks;
 	}
 	@ManyToOne
-	@JoinColumn(name="teamId",referencedColumnName="id", updatable = false, insertable = false)
+	@JoinColumn(name="teamId",referencedColumnName="id", updatable = true, insertable = true)
 	public Team getTeam() {
 		return team;
 	}
@@ -85,11 +84,17 @@ public class User implements Serializable {
 		this.team = team;
 	}
 
-	public Integer getType() {
-		return Type;
-	}
+	
 
-	public void setType(Integer type) {
-		Type = type;
+	public User(Integer id, String name, String login, String password,
+			 List<Task> tasks, Team team) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.login = login;
+		this.password = password;
+		this.tasks = tasks;
+		this.team = team;
 	}
+	
 }

@@ -22,26 +22,26 @@ public class TestAddUser {
 		user.setName("Karim");
 		user.setLogin("User");
 		user.setPassword("123456");
-		user.setType(3);
+		
 
 		TeamLeader teamleader = new TeamLeader();
 		teamleader.setLogin("teamleader");
 		teamleader.setName("Krayem");
 		teamleader.setPassword("55700006");
-		teamleader.setType(1);
+	
 		
 		Tech tech = new Tech();
 		tech.setLogin("tech");
 		tech.setName("Aymen");
 		tech.setPassword("21744181");
-		tech.setType(2);
+		
 		
 		Team team = new Team();
 		team.setName("Team1");
 		
 		
 
-		System.out.println(proxy.AddUser(user));
+		
 		System.out.println(proxy.AddUser(teamleader));
 		System.out.println(proxy.AddUser(tech));
 		System.out.println(proxy.AddTeam(team));

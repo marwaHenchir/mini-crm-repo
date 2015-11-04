@@ -25,8 +25,9 @@ public class Client implements Serializable {
 	public Client() {
 		super();
 	} 
+	
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id    
 	public Integer getId() {
 		return this.id;
 	}
@@ -48,5 +49,13 @@ public class Client implements Serializable {
 	public void setProjects(List<Project> projects) {
 		Projects = projects;
 	}
+	
+	@Override
+	public String toString() {
+		return "Client [id=" + id + ", name=" + name + ", Projects=" + Projects
+				+ "]";
+	}
+	
+	
    
 }

@@ -44,7 +44,7 @@ public class Project implements Serializable {
 		this.name = name;
 	}
 	@ManyToOne
-	@JoinColumn(name="clientId",referencedColumnName="id", updatable = false, insertable = false)
+	@JoinColumn(name="clientId",referencedColumnName="id", updatable = false, insertable = true)
 	public Client getClient() {
 		return client;
 	}

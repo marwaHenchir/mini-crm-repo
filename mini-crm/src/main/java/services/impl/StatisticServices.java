@@ -35,12 +35,12 @@ public class StatisticServices implements StatisticServicesRemote, StatisticServ
 	@Override
 	public ArrayList<List<Task>> getCompleteIncompleteTasks(Integer id) {
 		ArrayList<List<Task>> result = new ArrayList<List<Task>>();
-		String jpql = "select t from Task t where t.project.id=:projectId and t.done:= false";
+		String jpql = "select t from Task t where t.project.id=:projectId and t.done:= true";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("projectId", id);
 		result.add(query.getResultList());
 		
-		String jpql2 = "select t from Task t where t.project.id=:projectId and t.done:= true";
+		String jpql2 = "select t from Task t where t.project.id=:projectId and t.done:= false";
 		Query query2 = entityManager.createQuery(jpql2);
 		query2.setParameter("projectId", id);
 		result.add(query2.getResultList());

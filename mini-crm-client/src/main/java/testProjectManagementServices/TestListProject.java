@@ -1,15 +1,16 @@
 package testProjectManagementServices;
 
+import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+
+import entities.Project;
 import services.interfaces.ProjectManagementServicesRemote;
 
-import entities.Client;
-
-
-public class TestAddClient {
+public class TestListProject {
 
 	public static void main(String[] args) throws NamingException {
 		Context context = new InitialContext();
@@ -17,16 +18,11 @@ public class TestAddClient {
 		ProjectManagementServicesRemote proxy = (ProjectManagementServicesRemote) context
 				.lookup(jndiName);
 		
-		Client client = new Client();
-		client.setName("companyX");
-		Client client1 = new Client();
-		client1.setName("companyY");
-		
-		
-		System.out.println(proxy.addClient(client));
-		System.out.println(proxy.addClient(client1));
-		
-
+		List<Project> projects = proxy.findAllProject();
+		for (Project p : projects) {
+			System.out.println(p.getName());
+			
+		}
 	}
 
 }

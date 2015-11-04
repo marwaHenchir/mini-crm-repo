@@ -6,10 +6,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import entities.Team;
 import entities.TeamLeader;
-import entities.Tech;
 import entities.User;
 import services.interfaces.UserManagementServicesLocal;
 import services.interfaces.UserManagementServicesRemote;
@@ -78,9 +76,6 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 		}
 		return userLoggedIn;
 	}
-	
-	
-	
 	@Override
 	public Boolean AffectUserToTeam (Integer userid, Integer teamid) {
 		Boolean b = false;
@@ -113,27 +108,20 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 	}
 	return b;
 }
-	@Override
-	public Boolean SetTeamLeaderByName(String Name, Integer teamid){
-		Boolean b=false;
-	try {
-		TeamLeader teamLeaderFound = entityManager.find(TeamLeader.class, Name);
-		SetTeamLeaderById(teamLeaderFound.getId(), teamid);
-		b=true;
-} catch (Exception e) {	
-	b=false;
-}
-	return b;
-}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findTechInTeamByTeamid (Integer teamid) {
-		Team teamFound = entityManager.find(Team.class, teamid);		
-		return teamFound.getUsers();
+		String jpql = "select u from User u  where u.team.id=:idTeam";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("idTeam", teamid);
+		return query.getResultList();
 	}
 	@Override
-	public Integer FindTechTeamByTechId(Integer techid){
-		Tech techFound = entityManager.find(Tech.class, techid);
-		return techFound.getTeam().getId();
+	public Team FindTechTeamByTechId(Integer techid){
+		String jpql = "select u.team from User u where u.id=:idUser";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("idUser", techid);
+		return (Team) query.getSingleResult();
 	}
 	@Override
 	public Boolean AddTeam(Team team) {
@@ -145,5 +133,13 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 			System.err.println("problem adding Team");
 		}
 		return b;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+    public List<Team> findAllTeams() {
+		String jpql = "select t from Team t";
+		Query query = entityManager.createQuery(jpql);
+		
+		return query.getResultList();
 	}
 }

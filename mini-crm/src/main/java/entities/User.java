@@ -84,8 +84,6 @@ public class User implements Serializable {
 		this.team = team;
 	}
 
-	
-
 	public User(Integer id, String name, String login, String password,
 			 List<Task> tasks, Team team) {
 		super();

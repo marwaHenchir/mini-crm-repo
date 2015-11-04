@@ -18,10 +18,10 @@ public interface UserManagementServicesRemote {
 	
 	Boolean SetTeamLeaderById(Integer userid, Integer teamid);
 	Boolean AffectUserToTeam (Integer userid, Integer teamid);
-	Boolean SetTeamLeaderByName(String Name, Integer teamid);
 	
 	List<User> findTechInTeamByTeamid(Integer teamid);
-	Integer FindTechTeamByTechId(Integer techid);
+	Team FindTechTeamByTechId(Integer techid);
 	
 	Boolean AddTeam(Team team);
+	List<Team> findAllTeams();
 }

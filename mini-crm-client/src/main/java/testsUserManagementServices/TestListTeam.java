@@ -18,17 +18,29 @@ public class TestListTeam {
 		UserManagementServicesRemote proxy = (UserManagementServicesRemote) context
 				.lookup(jndiName);
 		
-//		List<Team> Teams = proxy.findAllTeams();
-	//	for (Team t : Teams) {
-		//	System.out.println(t.getId());
-		//}
+		System.out.println("---------------");
+		List<Team> Teams = proxy.findAllTeams();
+		for (Team t : Teams) {
+		System.out.println(t.getName());
 		
+		}
+		System.out.println("---------------");
 		List<User> user =proxy.findTechInTeamByTeamid(1);
 		for (User u : user) {
 			System.out.println(u.getName());
+		
 		}
-		Team team = proxy.FindTechTeamByTechId(2);
-			System.out.println(team.getId());
+		System.out.println("---------------");
+		
+		List<User> user1 =proxy.findTechInTeamByTeamid(2);
+		for (User u : user1) {
+			System.out.println(u.getName());
+		
 		}
+		System.out.println("---------------");
+		Team team = proxy.FindTechTeamByTechId(3);
+			System.out.println(team.getName());
+			System.out.println("////////////");	
+	}
 
 	}

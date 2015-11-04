@@ -24,10 +24,15 @@ public class TestAddProject {
 		client.setName("companyX");
 		project.setClient(client);
 		
-		
-		
+		Client client1 = new Client();
+		client1.setId(2);
+		client1.setName("companyY");
+		Project project1 = new Project();
+		project1.setName("projetY1");
+		project1.setClient(client1);
 		
 		System.out.println(proxy.addProject(project));
+		System.out.println(proxy.addProject(project1));
 		
 	}
 

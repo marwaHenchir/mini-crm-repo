@@ -1,6 +1,6 @@
 package services.impl;
 
-import java.util.Collection;
+
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entities.Client;
-
 import entities.Project;
 import entities.Task;
 import entities.Tech;
@@ -103,6 +102,16 @@ public class ProjectManagementServices implements ProjectManagementServicesRemot
 		
 		return query.getResultList();
 	}
+    
+    @SuppressWarnings("unchecked")
+	@Override
+	public List<Project> findProjectByClientId(Integer id) {
+		String jpql = "select p from Project p  where p.client.id=:idClient";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("idClient", id);
+		return query.getResultList();
+	}
+
     	
     	
 

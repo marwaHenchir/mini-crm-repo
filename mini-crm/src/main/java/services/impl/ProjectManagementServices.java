@@ -1,6 +1,8 @@
 package services.impl;
 
 
+import java.security.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -86,6 +88,7 @@ public class ProjectManagementServices implements ProjectManagementServicesRemot
 			Task task = entityManager.find(Task.class, idtask);
 			
 			task.setDone(true);
+			task.setFinish_date(new Date());
 			entityManager.merge(task);
 			b=true;
 		} catch (Exception e) {

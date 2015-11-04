@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entities.Project;
 import entities.Team;
 import entities.TeamLeader;
 import entities.Tech;
@@ -145,5 +146,13 @@ public class UserManagementServices implements UserManagementServicesRemote, Use
 			System.err.println("problem adding Team");
 		}
 		return b;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+    public List<Team> findAllTeams() {
+		String jpql = "select t from Team t";
+		Query query = entityManager.createQuery(jpql);
+		
+		return query.getResultList();
 	}
 }

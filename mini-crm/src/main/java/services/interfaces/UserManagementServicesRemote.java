@@ -24,4 +24,5 @@ public interface UserManagementServicesRemote {
 	Integer FindTechTeamByTechId(Integer techid);
 	
 	Boolean AddTeam(Team team);
+	List<Team> findAllTeams();
 }
